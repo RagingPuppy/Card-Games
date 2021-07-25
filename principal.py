@@ -3,32 +3,31 @@ from pygame import *
 from pygame.locals import *
 import time
 import sys
-from pygame.mixer import Sound
-from pygame.surface import Surface
+from pygame import mixer
+from pygame import surface
 import napoleon
 from golf import *
 from solitaire import *
 from general_functions import *
-import Music
 import options
 
 
 def golf(window):
-    golfsound = pygame.mixer.Sound("Melbourne Bounce 2.wav")
-    golfsound.play()
+    mixer.music.load('C:/Users/djjen/PycharmProjects/pythonProject2/Music/Melbourne_Bounce_2.wav')
+    mixer.music.play(-1)
 
 def napoleon(window):
-    napoleonsound = pygame.mixer.Sound("My Song.wav")
-    napoleonsound.play()
+    mixer.music.load('C:/Users/djjen/PycharmProjects/pythonProject2/Music/My_Song.ogg')
+    mixer.music.play(-1)
 
-def solitaire(window_sound):
-    window_sound = pygame.mixer.Sound('Comeback_Rewind.ogg')
-    window_sound.play()
+def solitaire(window):
+    mixer.music.load('C:/Users/djjen/PycharmProjects/pythonProject2/Music/Comback_Rewind.wav')
+    mixer.music.play(-1)
 
 
 def credit(window):
-    creditsound = pygame.mixer.Sound("credits.wav")
-    creditsound.play()
+    mixer.music.load("credits.wav")
+    mixer.music.play(-1)
 
     say_images = images("images/credits/")
     list_images = list(say_images)
@@ -85,7 +84,7 @@ def main():
 
                 if 100 < mouseX < 500 + (150 * (1 - ((mouseY - 130) / 225))) and 130 < mouseY < 355:
                     print("klondike")
-                    solitaire('window_sound')
+                    solitaire(window)
                 if 500 + (200 * (1 - ((mouseY - 130) / 225))) < mouseX < 1100 and 130 < mouseY < 355:
                     print("napoleon")
                     napoleon(type_cards, game_size)
