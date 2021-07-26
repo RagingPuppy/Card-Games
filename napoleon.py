@@ -6,7 +6,7 @@ import time
 from random import *
 from options import *
 from general_functions import *
-import principal
+from principal import *
 
 
 def images(those_cards, type_cards):

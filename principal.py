@@ -6,26 +6,26 @@ import sys
 from pygame import mixer
 from pygame import surface
 import napoleon
-from golf import *
-from solitaire import *
+import golf
+import solitaire
 from general_functions import *
 import options
 
 
-def golf(window):
+def play_golf_music():
     mixer.music.load('C:/Users/djjen/PycharmProjects/pythonProject2/Music/Melbourne_Bounce_2.wav')
     mixer.music.play(-1)
 
-def napoleon(window):
+def play_napoleon_music():
     mixer.music.load('C:/Users/djjen/PycharmProjects/pythonProject2/Music/My_Song.ogg')
     mixer.music.play(-1)
 
-def solitaire(window):
+def play_solitaire_music():
     mixer.music.load('C:/Users/djjen/PycharmProjects/pythonProject2/Music/Comback_Rewind.wav')
     mixer.music.play(-1)
 
 
-def credit(window):
+def play_credit_music():
     mixer.music.load("credits.wav")
     mixer.music.play(-1)
 
@@ -84,13 +84,13 @@ def main():
 
                 if 100 < mouseX < 500 + (150 * (1 - ((mouseY - 130) / 225))) and 130 < mouseY < 355:
                     print("klondike")
-                    solitaire(window)
+                    solitaire.solitaire(type_cards, game_size, number_packs)
                 if 500 + (200 * (1 - ((mouseY - 130) / 225))) < mouseX < 1100 and 130 < mouseY < 355:
                     print("napoleon")
-                    napoleon(type_cards, game_size)
+                    napoleon.napoleon(type_cards, game_size)
                 if 100 < mouseX < 500 + (150 * (1 - ((mouseY - 405) / 225))) and 405 < mouseY < 630:
                     print("golf")
-                    golf(type_cards,game_size)
+                    golf.golf(type_cards,game_size)
                 if 500 + (200 * (1 - ((mouseY - 405) / 225))) < mouseX < 1100 and 405 < mouseY < 466:
                     print("options")
                     type_cards, game_size, number_packs = options.options(window, type_cards, game_size, number_packs, all_options)
