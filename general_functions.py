@@ -154,7 +154,7 @@ def check_move(departure_card,comparison_card,rules):
 ################################################# #########################################
 ################################################# #########################################
 
-def generation_random_game(card_directory, number_cards,number_packs):
+def random_game_generation(card_directory, number_cards,number_packs):
     # Return a random deck based on the number of cards in the deck
     # and the number of packages.
 

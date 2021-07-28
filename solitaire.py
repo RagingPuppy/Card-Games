@@ -231,9 +231,8 @@ def solitaire(type_cards, game_size, number_packs):
     image_select_top = pygame.image.load("images/select_top.png")
 
     # Definition of the game
-    number_packs = int(game_size / 4)
+    number_cards = int(game_size / 4)
 
-def number_cards(game_rules):
     # Stacking rules in the table
     game_rules = [number_cards, "start", "inf", "diff_color", "king", "solitaire"]
 
@@ -257,14 +256,14 @@ def number_cards(game_rules):
     last_column = window_size(game)
     windowX, windowY = last_column + 150, 750
     window = pygame.display.set_mode((windowX, windowY))
-    background = pygame.transform.scale(background, (windowX, windowY))
-    window.blit(background, (0, 0))
+    back = pygame.transform.scale(back, (windowX, windowY))
+    window.blit(back, (0, 0))
 
     # Creation of game variables
-    card_select1 = ""  # Selected card
+    card_select1 = ""  # Card selection
     card_select2 = ""  # Comparison map
     both_sides = 0  # Defines whether a card can be returned or not
-    to_move = []  # Defines the set of cards to move
+    to_move = []  # Defines the set of cards to be moved
     cardplace1 = []  # Defines the location in game of map 1
     cardplace2 = []  # Defines the location in game of map 2
     selection = ""  # Set the icon selected in the sidebar
@@ -278,7 +277,7 @@ def number_cards(game_rules):
             mouse_coord = pygame.mouse.get_pos()
 
             # Bottom display
-            window.blit(background, (0, 0))
+            window.blit(back, (0, 0))
 
             # Display of the game board
             blitimages(window, game, number_packs, last_column, type_cards, type_back)
@@ -301,7 +300,8 @@ def number_cards(game_rules):
                 if selection == "menu":
                     principal.main()
                 if selection == "options":
-                    type_cards, restart = options.options(window, type_cards, number_cards * 4, number_packs, False)
+                    type_cards, restart = options.options(window, type_cards, number_cards * 4, number_packs,
+                                                           False)
                     if restart == True:
                         solitaire()
                 if selection == "retour":
@@ -329,14 +329,14 @@ def number_cards(game_rules):
                     pos1 = []
                     cardplace1 = []
 
-                # If no card is selected
+                ## If no card is selected
                 if card_select1 == "":
 
-                    # Then we can select a card
+                    ## Then we can select a card
                     try:
                         card_select1, pos1, cardplace1, both_sides = cardclick(mouse_coord, game, last_column,
                                                                                number_packs)
-                        # We return the card if possible
+                        ## We return the card if possible
                         if both_sides == 1:
                             game[cardplace1[0]][cardplace1[1]][1] = 1
                             card_select1 = ""
@@ -348,15 +348,15 @@ def number_cards(game_rules):
                         pos1 = []
                         cardplace1 = []
 
-                # If a card is already selected
+                ## If a card is already selected
                 else:
                     valid = False
 
-                    # We select a second card
+                    ## We select a second card
                     card_select2, pos2, cardplace2, both_sides = cardclick(mouse_coord, game, last_column,
                                                                            number_packs)
 
-                    # We return the card if possible
+                    ## We return the card if possible
                     if both_sides == 1:
                         try:
                             game[cardplace2[0]][cardplace2[1]][1] = 1
@@ -371,7 +371,7 @@ def number_cards(game_rules):
                     except:
                         pass
 
-                    # Deselect the card if you click on it again
+                    ## Deselect the card if you click on it again
                     if card_select1 == card_select2:
                         card_select1 = ""
                         card_select2 = ""
@@ -380,10 +380,10 @@ def number_cards(game_rules):
                         cardplace1 = []
                         cardplace2 = []
 
-            # Right click management
+            ## Right click management
             if event.type == MOUSEBUTTONDOWN and event.button == 3:
 
-                # Select a card
+                ## Select a card
                 try:
                     card_select1, pos1, cardplace1, both_sides = cardclick(mouse_coord, game, last_column,
                                                                            number_packs)
@@ -392,7 +392,7 @@ def number_cards(game_rules):
                     pos1 = []
                     cardplace1 = []
 
-                # Checking if a location is available on arrival
+                ## Checking if a location is available on arrival
                 for i in range(number_packs * 4):
                     try:
                         card_select2 = game[len(game) - 2 - number_packs * 4 + i][-1][0]
@@ -407,7 +407,7 @@ def number_cards(game_rules):
                     if valid == True:
                         break
 
-            # Checking the validity of the movement
+            ## Checking the validity of the movement
             if not card_select1 == "" and not card_select2 == "":
 
                 if valid == True and cardplace2[0] < len(game) - 2:
@@ -423,7 +423,7 @@ def number_cards(game_rules):
                     pos1 = []
                     valid = False
 
-                # Otherwise, the second card becomes the selected card
+                ## Otherwise, the second card becomes the selected card
                 else:
                     card_select1 = card_select2
                     pos1 = pos2
@@ -433,13 +433,13 @@ def number_cards(game_rules):
                 pos2 = []
                 cardplace2 = []
 
-            # If the selected card is an empty card (in the finish line), then nothing is selected
+            ## If the selected card is an empty card (in the finish line), then nothing is selected
             if card_select1 == "V00.png":
                 card_select1 = ""
                 pos1 = []
                 cardplace1 = []
 
-            # Display of selection contours
+            ## Display of selection contours
             try:
                 if cardplace1[1] == len(game[cardplace1[0]]) - 1 or cardplace[0] == len(game) - 2:
                     window.blit(image_select1, (pos1[0], pos1[1]))
@@ -452,14 +452,14 @@ def number_cards(game_rules):
             except:
                 pass
 
-            # Checking the end of the game
+            ## Checking the end of the game
             try:
                 win = 1
                 for i in range(number_packs * 4):
                     if not int(game[len(game) - 2 - number_packs * 4 + i][-1][0][1:3]) == 13:
                         win = 0
                 if win == 1:
-                    print("You won !")
+                    print("You Win !")
             except:
                 pass
 
