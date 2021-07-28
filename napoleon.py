@@ -5,7 +5,7 @@ import os
 import time
 from random import *
 from options import *
-from general_functions import *
+import general_functions
 from principal import *
 
 
@@ -35,7 +35,7 @@ def napoleon(type_cards, game_size):
     back = pygame.image.load("images/back/back.png")
     back = pygame.transform.scale(back, (windowX, windowY))
     card_directory = ("images/" + type_cards + "/cards/")
-    list_images = general_functions.random_game_generation(card_directory, rules, 1)
+    list_images = random_game_generation(card_directory, rules, 1)
     number_cards = len(list_images)
     say_cards = images(list_images, type_cards)
 
